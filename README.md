@@ -1,4 +1,5 @@
 # BudgetCalculator
+This is a simple Angular app that can allow the user to track income and expenses in order to budget themselves.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.1.
 
