@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+html {
+  height: 100vh;
+  margin: auto 0;
+  background: rgb(177, 65, 65);
+}
+body {
+  background-color: transparent;
+}
