@@ -1,5 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Amount } from './amount.model';
+
+
 
 @Component({
   selector: 'app-root',
@@ -9,14 +12,16 @@ import { FormControl } from '@angular/forms';
 export class AppComponent{
   title = 'budget-calculator';
   total: number = 0;
-  increment = new FormControl(null);
-  decrement = new FormControl(null);
+  name = new FormControl(null);
+  amount = new FormControl(null);
+  record: Amount[] = [];
 
-  incrementTotal(){
-    this.total= this.total + this.increment.value;
+  ngOnInit(): void{
+  
   }
 
-  decrementTotal(){
-    this.total= this.total - this.decrement.value;
+  recordTotal(){
+    this.total= this.total + this.amount.value;
+    this.record.push(this.name.value, this.amount.value);
   }
 }

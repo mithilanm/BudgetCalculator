@@ -2,15 +2,16 @@
   <div class="text-center">
     <h1> Budget Calculator </h1>
     <h3> Your Total: ${{ total }}</h3>
+    <div>
+      <input type="text" [formControl]="name">
+      <input type="number" [formControl]="amount">
+      <button class="btn btn-success" type="button" (click)="recordTotal()">Add</button>
+    </div>
+    </div>
     <div class="row">
-      <div class="col-md-6">
-        <input type="number" [formControl]="increment">
-        <button class="btn btn-success" type="button" (click)="incrementTotal()">Increment</button>
-      </div>
-      <div class="col-md-6">
-        <input type="number" [formControl]="decrement">
-        <button class="btn btn-danger" type="button" (click)="decrementTotal()">Decrement</button>
+      <div class="col-xs-12">
+       <p *ngFor="let item of record"> {{ item }} </p>
       </div>
     </div>
-  </div>
 </div>
+
