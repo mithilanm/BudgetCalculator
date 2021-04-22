@@ -2,15 +2,33 @@
   <div class="text-center">
     <h1> Budget Calculator </h1>
     <h3> Your Total: ${{ total }}</h3>
-    <div>
-      <input type="text" [formControl]="name">
-      <input type="number" [formControl]="amount">
-      <button class="btn btn-success" type="button" (click)="recordTotal()">Add</button>
+    <form [formGroup]="recordForm" (ngSubmit)="recordTotal()">
+      <div>
+        <input type="text" id="name" formControlName="name"  #name required>
+        <input type="number" id="amount"formControlName="amount" #amount required>
+        <button class="btn btn-success" type="submit" [disabled]="!recordForm.valid">Add</button>
+        <p class="error" *ngIf="!recordForm.valid && recordForm.touched">Please enter a valid input!</p>
+      </div>
+    </form>
     </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-       <p *ngFor="let item of record"> {{ item }} </p>
+    <br>
+    <br>
+    <div class="container" id="display">
+      <div class="row">
+        <div class="col" id="income">
+          <h4 class="text-center">Income</h4>
+        </div>
+        <div class="col" id="expenses">
+          <h4 class="text-center">Expenses</h4>
+        </div>
+      </div>
+      <div class="row" *ngFor="let item of record">
+        <div class="col" id="income">
+          <p *ngIf="item.amount>0"> {{ item.name }} -  ${{ item.amount }} </p>
+        </div>
+        <div class="col" id="expenses">
+          <p *ngIf="item.amount<0"> {{ item.name }} - ${{ -1*item.amount }} </p>
+        </div>
       </div>
     </div>
 </div>

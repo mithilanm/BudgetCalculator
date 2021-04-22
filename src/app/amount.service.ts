@@ -1,10 +1,8 @@
-import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { EventEmitter } from "@angular/core";
 import { Amount } from "./amount.model";
 
-@Injectable()
 export class AmountService{
-    amountChanged = new Subject<Amount[]>();
+    amountChanged = new EventEmitter<Amount[]>();
     private amount: Amount[] =[];
     
     getAmount(){

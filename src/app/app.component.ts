@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Amount } from './amount.model';
-
+import { AmountService } from './amount.service';
 
 
 @Component({
@@ -12,16 +12,38 @@ import { Amount } from './amount.model';
 export class AppComponent{
   title = 'budget-calculator';
   total: number = 0;
-  name = new FormControl(null);
-  amount = new FormControl(null);
-  record: Amount[] = [];
+  recordForm: FormGroup;
+  record: Amount[];
+
+  constructor(private amountService: AmountService){
+
+  }
+
 
   ngOnInit(): void{
-  
+    this.record = this.amountService.getAmount();
+    this.amountService.amountChanged
+    .subscribe(
+      (amount: Amount[])=> {
+        this.record = amount;
+      }
+    );
+    this.initForm();
+    this.record = this.amountService.getAmount();
   }
 
   recordTotal(){
-    this.total= this.total + this.amount.value;
-    this.record.push(this.name.value, this.amount.value);
+    this.total= this.total + this.recordForm.value.amount;
+    this.amountService.addAmount(this.recordForm.value);
+  }
+
+  private initForm(){
+    let recordName = '';
+    let recordAmount = '';
+
+    this.recordForm = new FormGroup({
+      'name': new FormControl(recordName, Validators.required),
+      'amount': new FormControl(recordAmount, Validators.required)
+    })
   }
 }

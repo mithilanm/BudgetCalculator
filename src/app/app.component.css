@@ -1,3 +1,21 @@
 input {
   margin-right: 10px;
+  border-radius: 5px;
+}
+
+#income {
+  background-color: #74d680;
+}
+
+#expenses {
+  background-color: #ff7878;
+}
+
+.error {
+  color: red;
+}
+
+p {
+  border-top: solid black;
+  border-bottom: solid black;
 }
