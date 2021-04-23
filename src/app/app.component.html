@@ -14,7 +14,7 @@
     <br>
     <br>
     <div class="container" id="display">
-      <div class="row">
+      <div class="row" id="title">
         <div class="col" id="income">
           <h4 class="text-center">Income</h4>
         </div>
@@ -22,12 +22,12 @@
           <h4 class="text-center">Expenses</h4>
         </div>
       </div>
-      <div class="row" *ngFor="let item of record">
+      <div class="row" id="entry" *ngFor="let item of record">
         <div class="col" id="income">
-          <p *ngIf="item.amount>0"> {{ item.name }} -  ${{ item.amount }} </p>
+          <p class="list" *ngIf="item.amount>0"> {{ item.name }} -  ${{ item.amount }} </p>
         </div>
         <div class="col" id="expenses">
-          <p *ngIf="item.amount<0"> {{ item.name }} - ${{ -1*item.amount }} </p>
+          <p class="list" *ngIf="item.amount<0"> {{ item.name }} - ${{ -1*item.amount }} </p>
         </div>
       </div>
     </div>

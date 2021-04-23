@@ -15,7 +15,12 @@ input {
   color: red;
 }
 
-p {
-  border-top: solid black;
+#title {
+  border: solid black;
+}
+
+#entry {
+  border-left: solid black;
+  border-right: solid black;
   border-bottom: solid black;
 }
