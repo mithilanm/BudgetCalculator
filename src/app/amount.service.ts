@@ -13,4 +13,10 @@ export class AmountService{
         this.amount.push(amount);
         this.amountChanged.next(this.amount.slice());
     }
+
+    updateAmount(index: number, newAmount: Amount){
+        this.amount[index] = newAmount;
+        this.amountChanged.next(this.amount.slice());
+    }
+
 }

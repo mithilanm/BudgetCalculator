@@ -4,32 +4,31 @@
     <h3> Your Total: ${{ total }}</h3>
     <form [formGroup]="recordForm" (ngSubmit)="recordTotal()">
       <div>
-        <input type="text" id="name" formControlName="name"  #name required>
-        <input type="number" id="amount"formControlName="amount" #amount required>
+        <input type="text" id="name" [(ngModel)]="chosen.name" formControlName="name" #name required>
+        <input type="number" id="amount" [(ngModel)]="chosen.amount"  formControlName="amount" #amount required>
         <button class="btn btn-success" type="submit" [disabled]="!recordForm.valid">Add</button>
         <p class="error" *ngIf="!recordForm.valid && recordForm.touched">Please enter a valid input!</p>
       </div>
     </form>
-    </div>
-    <br>
-    <br>
-    <div class="container" id="display">
-      <div class="row" id="title">
-        <div class="col" id="income">
-          <h4 class="text-center">Income</h4>
-        </div>
-        <div class="col" id="expenses">
-          <h4 class="text-center">Expenses</h4>
-        </div>
+  </div>
+  <br>
+  <br>
+  <div class="container" id="display">
+    <div class="row" id="title">
+      <div class="col" id="income">
+        <h4 class="text-center">Income</h4>
       </div>
-      <div class="row" id="entry" *ngFor="let item of record">
-        <div class="col" id="income">
-          <p class="list" *ngIf="item.amount>0"> {{ item.name }} -  ${{ item.amount }} </p>
-        </div>
-        <div class="col" id="expenses">
-          <p class="list" *ngIf="item.amount<0"> {{ item.name }} - ${{ -1*item.amount }} </p>
-        </div>
+      <div class="col" id="expenses">
+        <h4 class="text-center">Expenses</h4>
       </div>
     </div>
+    <div class="row" id="entry" *ngFor="let item of record; let i=index">
+      <div class="col" id="income">
+        <a class="list" *ngIf="item.amount>0" (click)="itemClicked(item, i)"> {{ item.name }} - ${{ item.amount }} </a>
+      </div>
+      <div class="col" id="expenses">
+        <a class="list" *ngIf="item.amount<0" (click)="itemClicked(item, i)"> {{ item.name }} - ${{ -1*item.amount }} </a>
+      </div>
+    </div>
+  </div>
 </div>
-

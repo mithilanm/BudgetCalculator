@@ -14,7 +14,8 @@ export class AppComponent{
   total: number = 0;
   recordForm: FormGroup;
   record: Amount[];
-
+  chosen = { name: "", amount: 0, index: 0};
+  editMode = false;
   constructor(private amountService: AmountService){
 
   }
@@ -33,8 +34,21 @@ export class AppComponent{
   }
 
   recordTotal(){
-    this.total= this.total + this.recordForm.value.amount;
-    this.amountService.addAmount(this.recordForm.value);
+    if(this.editMode){
+      this.amountService.updateAmount(this.chosen.index, this.recordForm.value);
+      this.editMode = false;
+    } else {
+      this.total= this.total + this.recordForm.value.amount;
+      this.amountService.addAmount(this.recordForm.value);
+    }
+    this.recordForm.reset();
+  }
+
+  itemClicked(item: Amount, index: number){
+    this.chosen.name=item.name;
+    this.chosen.amount = item.amount;
+    this.chosen.index = index;
+    this.editMode = true;
   }
 
   private initForm(){

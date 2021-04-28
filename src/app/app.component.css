@@ -24,3 +24,8 @@ input {
   border-right: solid black;
   border-bottom: solid black;
 }
+
+a {
+  color: black;
+  cursor: pointer;
+}
