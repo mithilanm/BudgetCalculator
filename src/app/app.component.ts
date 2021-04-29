@@ -11,10 +11,14 @@ import { AmountService } from './amount.service';
 })
 export class AppComponent{
   title = 'budget-calculator';
-  total: number = 0;
+  total: number = 0.00;
   recordForm: FormGroup;
   record: Amount[];
-
+  textName: string;
+  textAmount: number;
+  originalAmount: number;
+  index: number;
+  editMode = false;
   constructor(private amountService: AmountService){
 
   }
@@ -32,9 +36,30 @@ export class AppComponent{
     this.record = this.amountService.getAmount();
   }
 
-  recordTotal(){
+  onSubmit(){
+    if(this.editMode){
+      this.total = this.total - this.originalAmount;
+      this.amountService.updateAmount(this.index, this.recordForm.value);
+      this.editMode = false;
+    } else {
+      this.amountService.addAmount(this.recordForm.value);
+    }
     this.total= this.total + this.recordForm.value.amount;
-    this.amountService.addAmount(this.recordForm.value);
+    this.recordForm.reset();
+  }
+
+  itemClicked(item: Amount, index: number){
+    this.textName=item.name;
+    this.textAmount, this.originalAmount = item.amount;
+    this.index = index;
+    this.editMode = true;
+  }
+
+  onDelete(){
+    this.total = this.total - this.originalAmount;
+    this.amountService.deleteAmount(this.index);
+    this.editMode = false;
+    this.recordForm.reset();
   }
 
   private initForm(){
