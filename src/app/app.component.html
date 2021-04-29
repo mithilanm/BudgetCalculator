@@ -1,7 +1,7 @@
 <div class="container">
   <div class="text-center">
     <h1> Budget Calculator </h1>
-    <h3> Your Total: ${{ total }}</h3>
+    <h3> Your Total: ${{ total.toFixed(2) }}</h3>
     <form [formGroup]="recordForm" (ngSubmit)="onSubmit()">
       <div>
         <input type="text" id="name" [(ngModel)]="textName" formControlName="name" #name required placeholder="Name">

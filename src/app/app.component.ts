@@ -50,7 +50,8 @@ export class AppComponent{
 
   itemClicked(item: Amount, index: number){
     this.textName=item.name;
-    this.textAmount, this.originalAmount = item.amount;
+    this.textAmount = item.amount;
+    this.originalAmount = item.amount;
     this.index = index;
     this.editMode = true;
   }
