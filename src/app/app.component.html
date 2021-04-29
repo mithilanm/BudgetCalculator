@@ -2,12 +2,13 @@
   <div class="text-center">
     <h1> Budget Calculator </h1>
     <h3> Your Total: ${{ total }}</h3>
-    <form [formGroup]="recordForm" (ngSubmit)="recordTotal()">
+    <form [formGroup]="recordForm" (ngSubmit)="onSubmit()">
       <div>
-        <input type="text" id="name" [(ngModel)]="chosen.name" formControlName="name" #name required>
-        <input type="number" id="amount" [(ngModel)]="chosen.amount"  formControlName="amount" #amount required>
-        <button class="btn btn-success" type="submit" [disabled]="!recordForm.valid">Add</button>
-        <p class="error" *ngIf="!recordForm.valid && recordForm.touched">Please enter a valid input!</p>
+        <input type="text" id="name" [(ngModel)]="textName" formControlName="name" #name required placeholder="Name">
+        <input type="number" id="amount" [(ngModel)]="textAmount"  formControlName="amount" #amount required placeholder="Amount">
+        <button class="btn btn-success" type="submit" [disabled]="!recordForm.valid">{{editMode ? 'Update' : 'Add'}}</button>
+        <button class="btn btn-danger" type="button" *ngIf="editMode" (click)="onDelete()">Delete</button>
+        <!-- <p class="error" *ngIf="!recordForm.valid && recordForm.touched">Please enter a valid input!</p> -->
       </div>
     </form>
   </div>
@@ -24,7 +25,7 @@
     </div>
     <div class="row" id="entry" *ngFor="let item of record; let i=index">
       <div class="col" id="income">
-        <a class="list" *ngIf="item.amount>0" (click)="itemClicked(item, i)"> {{ item.name }} - ${{ item.amount }} </a>
+        <a class="list" *ngIf="item.amount>=0" (click)="itemClicked(item, i)"> {{ item.name }} - ${{ item.amount }} </a>
       </div>
       <div class="col" id="expenses">
         <a class="list" *ngIf="item.amount<0" (click)="itemClicked(item, i)"> {{ item.name }} - ${{ -1*item.amount }} </a>

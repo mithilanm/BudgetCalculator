@@ -19,4 +19,8 @@ export class AmountService{
         this.amountChanged.next(this.amount.slice());
     }
 
+    deleteAmount(index: number){
+        this.amount.splice(index, 1); //splice(start, deleteCount)
+        this.amountChanged.next(this.amount.slice());
+    }
 }
